@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../extensions/hex_color.dart';
-import '../widgets/landing_page_divider.dart';
-import '../widgets/navigation_bar.dart';
+import '../../extensions/hex_color.dart';
+import '../../widgets/landing_page_divider.dart';
+import '../../widgets/navigation_bar.dart';
+import './categories.dart';
+import './enter_url.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -29,8 +31,8 @@ class LandingPage extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 50,
                       fontWeight: FontWeight.w300))),
-              FabDivider('Category'),
-              FabDivider('Enter Url'),
+              Categories(),
+              EnterURL(),
               FabDivider('Shape Maker'),
             ],
           ),
