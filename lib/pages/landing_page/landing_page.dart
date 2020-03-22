@@ -24,16 +24,23 @@ class LandingPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               NavigationBar(),
-              Container(
-                margin: EdgeInsets.only(top: 100, bottom: 60),
-                child: Text('Create Code',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 50,
-                      fontWeight: FontWeight.w300))),
-              Categories(),
-              EnterURL(),
-              FabDivider('Shape Maker'),
+              Expanded(
+                child: ListView(
+                  children: <Widget>[
+                    Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.only(top: 100, bottom: 60),
+                        child: Text('Create Code',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 50,
+                                fontWeight: FontWeight.w300))),
+                    Categories(),
+                    EnterURL(),
+                    FabDivider('Shape Maker'),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
