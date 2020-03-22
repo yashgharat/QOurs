@@ -22,8 +22,13 @@ class LandingPage extends StatelessWidget {
           child: Column(
             children: <Widget>[
               NavigationBar(),
-              Text('Create Code',
-                  style: TextStyle(color: Colors.white, fontSize: 50, fontWeight: FontWeight.w300)),
+              Container(
+                margin: EdgeInsets.only(top: 100, bottom: 60),
+                child: Text('Create Code',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 50,
+                      fontWeight: FontWeight.w300))),
               FabDivider('Category'),
               FabDivider('Enter Url'),
               FabDivider('Shape Maker'),
