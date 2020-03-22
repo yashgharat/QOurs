@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../extensions/hex_color.dart';
+import '../widgets/landing_page_divider.dart';
+import '../widgets/navigation_bar.dart';
 
 class LandingPage extends StatelessWidget {
   @override
@@ -19,14 +21,12 @@ class LandingPage extends StatelessWidget {
         body: Center(
           child: Column(
             children: <Widget>[
-              Text(
-                'Hello World Uno',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'Hello World Dos',
-                style: TextStyle(color: Colors.white),
-              )
+              NavigationBar(),
+              Text('Create Code',
+                  style: TextStyle(color: Colors.white, fontSize: 50, fontWeight: FontWeight.w300)),
+              FabDivider('Category'),
+              FabDivider('Enter Url'),
+              FabDivider('Shape Maker'),
             ],
           ),
         ),
