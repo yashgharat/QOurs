@@ -6,7 +6,7 @@ class NavigationBar extends StatelessWidget {
     return Container(
       height: 64,
       width: double.infinity,
-      color: Colors.black,
+      color: Colors.transparent,
       child: Row(
         children: <Widget>[
           Text('QOurs', style: TextStyle(color: Colors.white, fontSize: 30,))
