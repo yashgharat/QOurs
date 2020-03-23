@@ -19,28 +19,61 @@ class StyledFormField extends StatefulWidget {
 }
 
 class _StyledFormFieldState extends State<StyledFormField> {
+  double _blurRadius = 0.0, _spreadRadius = 0.0;
+  bool selected = false;
+
+  FocusNode _focus = new FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focus.addListener(_onFocusChange);
+  }
+
+  void _onFocusChange() {
+    setState(() {
+      selected = !selected;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 650,
-      height: 35,
-      child: TextField(
-        decoration: InputDecoration(
-          filled: true,
-          hintText: "Enter URL",
-          fillColor: Colors.white,
-          contentPadding: EdgeInsets.symmetric(horizontal: 10),
-          enabledBorder: GradientOutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
-            focusedGradient: LinearGradient(colors: [Colors.red, Colors.blue]),
-            unfocusedGradient: LinearGradient(colors: [Colors.yellow, Colors.green]),
-            borderSide: BorderSide(width: 2),
-          ),
-          focusedBorder: OutlineInputBorder(
+    return AnimatedContainer(
+        duration: Duration(milliseconds: 500),
+        curve: Curves.linear,
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: Colors.purpleAccent,
+            blurRadius:
+                selected ? 8.0 : 0.0, // has the effect of softening the shadow
+            spreadRadius:
+                selected ? 8.0 : 0.0, // has the effect of extending the shadow
+          )
+        ], borderRadius: BorderRadius.circular(20.0), color: Colors.black),
+        width: 650,
+        height: 35,
+        child: TextField(
+          focusNode: _focus,
+          decoration: InputDecoration(
+            filled: true,
+            hintText: "Enter URL",
+            fillColor: Colors.white,
+            contentPadding: EdgeInsets.symmetric(horizontal: 10),
+            enabledBorder: GradientOutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
-              borderSide: BorderSide(width: 2, ),
-        ),
-      ),
-    ));
+              unfocusedGradient: LinearGradient(
+                  colors: [Colors.purpleAccent, Colors.deepPurple]),
+              borderSide: BorderSide(width: 4),
+              focusedGradient: null,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20.0),
+              borderSide: BorderSide(
+                color: Colors.transparent,
+                width: 2,
+              ),
+            ),
+          ),
+        ));
   }
 }
