@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_input_border/gradient_input_border.dart';
 import '../../widgets/landing_page_divider.dart';
+import 'package:flutter_animator/flutter_animator.dart';
 
-class EnterURL extends StatelessWidget {
+class EnterURL extends StatefulWidget {
+  @override
+  _EnterURLState createState() => _EnterURLState();
+}
+
+class _EnterURLState extends State<EnterURL> {
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return FadeInUpBig(
+      key: _StyledFormFieldState().basicAnimation,
       child: Column(
         children: <Widget>[FabDivider('Enter URL'), StyledFormField()],
       ),
@@ -19,7 +28,8 @@ class StyledFormField extends StatefulWidget {
 }
 
 class _StyledFormFieldState extends State<StyledFormField> {
-  double _blurRadius = 0.0, _spreadRadius = 0.0;
+    final GlobalKey<AnimatorWidgetState> basicAnimation =
+      GlobalKey<AnimatorWidgetState>();
   bool selected = false;
 
   FocusNode _focus = new FocusNode();
@@ -43,7 +53,7 @@ class _StyledFormFieldState extends State<StyledFormField> {
         curve: Curves.linear,
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
-            color: Colors.purpleAccent,
+            color: Colors.deepPurpleAccent[100],
             blurRadius:
                 selected ? 8.0 : 0.0, // has the effect of softening the shadow
             spreadRadius:
@@ -62,7 +72,7 @@ class _StyledFormFieldState extends State<StyledFormField> {
             enabledBorder: GradientOutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
               unfocusedGradient: LinearGradient(
-                  colors: [Colors.purpleAccent, Colors.deepPurple]),
+                  colors: [Colors.purpleAccent, Colors.deepPurpleAccent]),
               borderSide: BorderSide(width: 4),
               focusedGradient: null,
             ),

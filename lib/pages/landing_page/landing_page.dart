@@ -36,8 +36,7 @@ class LandingPage extends StatelessWidget {
                                 fontSize: 50,
                                 fontWeight: FontWeight.w300))),
                     Categories(),
-                    EnterURL(),
-                    FabDivider('Shape Maker'),
+                    Container(alignment: Alignment.center, child: EnterURL()),
                   ],
                 ),
               ),
@@ -47,4 +46,9 @@ class LandingPage extends StatelessWidget {
       ),
     );
   }
+}
+
+
+Widget objectBuilder() {
+  
 }

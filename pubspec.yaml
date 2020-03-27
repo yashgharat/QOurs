@@ -17,7 +17,7 @@ environment:
   sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
-  animator: ^1.0.0
+  flutter_animator: ^2.0.6
   gradient_input_border: ^1.0.0
   flutter:
     sdk: flutter
