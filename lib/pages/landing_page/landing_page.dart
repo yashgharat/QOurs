@@ -37,6 +37,7 @@ class LandingPage extends StatelessWidget {
                                 fontWeight: FontWeight.w300))),
                     Categories(),
                     Container(alignment: Alignment.center, child: EnterURL()),
+                    Container(height: 150,)
                   ],
                 ),
               ),

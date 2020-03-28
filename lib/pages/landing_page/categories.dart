@@ -42,7 +42,7 @@ class __CategoryCardState extends State<_CategoryCard> {
   String type;
   IconData iconData;
 
-  bool _selected = false;
+  bool _selected = false, hover = false;
   Color _cardColor = Colors.white;
 
   __CategoryCardState(this.type, this.iconData) {}
@@ -66,7 +66,21 @@ class __CategoryCardState extends State<_CategoryCard> {
                 _selected = !_selected;
               });
             },
-            hoverColor: Colors.deepPurpleAccent,
+            onHover: (bool isHover) {
+              setState(() {
+                this.hover = isHover;
+              });
+            },
+            hoverColor: (this._selected || this.hover)
+                  ? Colors.deepPurpleAccent
+                  : Colors.white,
+            child: Icon(
+              iconData,
+              color: (this._selected || this.hover)
+                  ? Colors.white
+                  : Colors.deepPurpleAccent,
+              size: 100.0,
+            ),
           ),
         ),
       ),
