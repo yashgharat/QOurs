@@ -6,6 +6,15 @@ import './categories.dart';
 import './enter_url.dart';
 
 class LandingPage extends StatelessWidget {
+  AnimationController animationController;
+  getControllerCallback(controller) {
+    this.animationController = controller;
+  }
+
+  fadeInUpBigcallback(bool selected) {
+    selected ? animationController.forward() : animationController.reverse();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,9 +44,11 @@ class LandingPage extends StatelessWidget {
                                 color: Colors.white,
                                 fontSize: 50,
                                 fontWeight: FontWeight.w300))),
-                    Categories(),
-                    Container(alignment: Alignment.center, child: EnterURL()),
-                    Container(height: 150,)
+                    Categories(this.fadeInUpBigcallback),
+                    Container(alignment: Alignment.center, child: EnterURL(this.getControllerCallback)),
+                    Container(
+                      height: 150,
+                    )
                   ],
                 ),
               ),
@@ -49,7 +60,4 @@ class LandingPage extends StatelessWidget {
   }
 }
 
-
-Widget objectBuilder() {
-  
-}
+Widget objectBuilder() {}

@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_input_border/gradient_input_border.dart';
 import '../../widgets/landing_page_divider.dart';
-import 'package:flutter_animator/flutter_animator.dart';
+import 'package:animate_do/animate_do.dart';
 
 class EnterURL extends StatefulWidget {
+  AnimationController animationController;
+  Function(AnimationController) callback;
+
+  EnterURL(this.callback);
+
   @override
   _EnterURLState createState() => _EnterURLState();
 }
 
 class _EnterURLState extends State<EnterURL> {
-
-
   @override
   Widget build(BuildContext context) {
     return FadeInUpBig(
-      key: _StyledFormFieldState().basicAnimation,
+      manualTrigger: true,
+      controller: (controller) {
+        controller.stop();
+        widget.callback(controller);
+      },
       child: Column(
         children: <Widget>[FabDivider('Enter URL'), StyledFormField()],
       ),
@@ -28,10 +35,7 @@ class StyledFormField extends StatefulWidget {
 }
 
 class _StyledFormFieldState extends State<StyledFormField> {
-    final GlobalKey<AnimatorWidgetState> basicAnimation =
-      GlobalKey<AnimatorWidgetState>();
   bool selected = false;
-
   FocusNode _focus = new FocusNode();
 
   @override

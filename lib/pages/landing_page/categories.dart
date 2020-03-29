@@ -2,25 +2,30 @@ import 'package:flutter/material.dart';
 import '../../widgets/landing_page_divider.dart';
 
 class Categories extends StatefulWidget {
+  Function(bool) fadeinUpBigCallback;
+
+  Categories(this.fadeinUpBigCallback);
+
   @override
   _CategoriesState createState() => _CategoriesState();
 }
 
 class _CategoriesState extends State<Categories> {
-  List<_CategoryCard> categoryList = [
-    _CategoryCard("URL", Icons.language),
-    _CategoryCard("Business", Icons.work),
-    _CategoryCard("Social Media", Icons.thumb_up)
-  ];
   @override
   Widget build(BuildContext context) {
+    List<_CategoryCard> categoryList = [
+      _CategoryCard("URL", Icons.language, widget.fadeinUpBigCallback),
+      _CategoryCard("Business", Icons.work, widget.fadeinUpBigCallback),
+      _CategoryCard("Social Media", Icons.thumb_up, widget.fadeinUpBigCallback)
+    ];
+
     return Container(
       child: Column(
         children: <Widget>[
           FabDivider('Category'),
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: categoryList)
+              children: categoryList),
         ],
       ),
     );
@@ -30,12 +35,12 @@ class _CategoriesState extends State<Categories> {
 class _CategoryCard extends StatefulWidget {
   String type;
   IconData iconData;
+  Function(bool) fadeinUpBigCallback;
 
-  _CategoryCard(this.type, this.iconData) {}
+  _CategoryCard(this.type, this.iconData, this.fadeinUpBigCallback) {}
 
   @override
-  __CategoryCardState createState() =>
-      __CategoryCardState(this.type, this.iconData);
+  __CategoryCardState createState() => __CategoryCardState();
 }
 
 class __CategoryCardState extends State<_CategoryCard> {
@@ -45,7 +50,12 @@ class __CategoryCardState extends State<_CategoryCard> {
   bool _selected = false, hover = false;
   Color _cardColor = Colors.white;
 
-  __CategoryCardState(this.type, this.iconData) {}
+  @override
+  void initState() {
+    type = widget.type;
+    iconData = widget.iconData;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +74,7 @@ class __CategoryCardState extends State<_CategoryCard> {
             onTap: () {
               setState(() {
                 _selected = !_selected;
+                widget.fadeinUpBigCallback(_selected);
               });
             },
             onHover: (bool isHover) {
@@ -72,8 +83,8 @@ class __CategoryCardState extends State<_CategoryCard> {
               });
             },
             hoverColor: (this._selected || this.hover)
-                  ? Colors.deepPurpleAccent
-                  : Colors.white,
+                ? Colors.deepPurpleAccent
+                : Colors.white,
             child: Icon(
               iconData,
               color: (this._selected || this.hover)
