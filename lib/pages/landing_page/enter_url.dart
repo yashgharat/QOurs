@@ -5,9 +5,10 @@ import 'package:animate_do/animate_do.dart';
 
 class EnterURL extends StatefulWidget {
   AnimationController animationController;
+  int index;
   Function(AnimationController) callback;
 
-  EnterURL(this.callback);
+  EnterURL(this.callback, this.index);
 
   @override
   _EnterURLState createState() => _EnterURLState();
@@ -23,7 +24,7 @@ class _EnterURLState extends State<EnterURL> {
         widget.callback(controller);
       },
       child: Column(
-        children: <Widget>[FabDivider('Enter URL'), StyledFormField()],
+        children: <Widget>[FabDivider('Enter URL ${widget.index}'), StyledFormField()],
       ),
     );
   }

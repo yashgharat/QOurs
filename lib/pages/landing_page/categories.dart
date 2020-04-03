@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:q_ours/pages/landing_page/enter_url.dart';
 import '../../widgets/landing_page_divider.dart';
 
 class Categories extends StatefulWidget {
-  Function(bool) fadeinUpBigCallback;
+  AnimationController previousAnimationController, animationController;
+  Widget child;
 
-  Categories(this.fadeinUpBigCallback);
+  getControllerCallback(controller) {
+    this.animationController = controller;
+  }
 
   @override
   _CategoriesState createState() => _CategoriesState();
 }
 
 class _CategoriesState extends State<Categories> {
+  int index, previousIndex = 0;
+  fadeInUpBigcallback(bool selected, int selectedIndex) {
+    if (widget.previousAnimationController != null) {
+      widget.previousAnimationController.reverse();
+    }
+    widget.animationController.forward();
+    setState(() {
+      this.index = selectedIndex;
+      widget.previousAnimationController = widget.animationController;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     List<_CategoryCard> categoryList = [
-      _CategoryCard("URL", Icons.language, widget.fadeinUpBigCallback),
-      _CategoryCard("Business", Icons.work, widget.fadeinUpBigCallback),
-      _CategoryCard("Social Media", Icons.thumb_up, widget.fadeinUpBigCallback)
+      _CategoryCard("URL", Icons.language, fadeInUpBigcallback, 1, this.index),
+      _CategoryCard("Business", Icons.work, fadeInUpBigcallback, 2, this.index),
+      _CategoryCard(
+          "Social Media", Icons.thumb_up, fadeInUpBigcallback, 3, this.index)
     ];
 
     return Container(
@@ -26,18 +43,33 @@ class _CategoriesState extends State<Categories> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: categoryList),
+          Container(
+            child: getChild(this.index),
+          )
         ],
       ),
     );
+  }
+
+  Widget getChild(int index) {
+    if (index == 1) {
+      return EnterURL(widget.getControllerCallback, index);
+    } else if (index == 2) {
+      return EnterURL(widget.getControllerCallback, index);
+    } else {
+      return EnterURL(widget.getControllerCallback, index);
+    }
   }
 }
 
 class _CategoryCard extends StatefulWidget {
   String type;
   IconData iconData;
-  Function(bool) fadeinUpBigCallback;
+  int index, selectedIndex;
+  Function(bool, int) fadeinUpBigCallback;
 
-  _CategoryCard(this.type, this.iconData, this.fadeinUpBigCallback) {}
+  _CategoryCard(this.type, this.iconData, this.fadeinUpBigCallback, this.index,
+      this.selectedIndex) {}
 
   @override
   __CategoryCardState createState() => __CategoryCardState();
@@ -59,6 +91,9 @@ class __CategoryCardState extends State<_CategoryCard> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      _selected = (widget.index == widget.selectedIndex) ? true : false;
+    });
     return Container(
       child: Card(
         elevation: 1,
@@ -74,7 +109,7 @@ class __CategoryCardState extends State<_CategoryCard> {
             onTap: () {
               setState(() {
                 _selected = !_selected;
-                widget.fadeinUpBigCallback(_selected);
+                widget.fadeinUpBigCallback(_selected, widget.index);
               });
             },
             onHover: (bool isHover) {
