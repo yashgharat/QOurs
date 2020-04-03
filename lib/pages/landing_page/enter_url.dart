@@ -4,7 +4,7 @@ import '../../widgets/landing_page_divider.dart';
 import 'package:animate_do/animate_do.dart';
 
 class EnterURL extends StatefulWidget {
-  static AnimationController animationController;
+  AnimationController animationController;
   Function(AnimationController) callback;
 
   EnterURL(this.callback);
@@ -16,18 +16,16 @@ class EnterURL extends StatefulWidget {
 class _EnterURLState extends State<EnterURL> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: FadeInUpBig(
+    return FadeInUpBig(
       manualTrigger: true,
       controller: (controller) {
         controller.stop();
-        print("here");
         widget.callback(controller);
       },
       child: Column(
         children: <Widget>[FabDivider('Enter URL'), StyledFormField()],
       ),
-    ));
+    );
   }
 }
 
