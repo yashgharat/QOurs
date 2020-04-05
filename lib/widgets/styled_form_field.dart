@@ -1,36 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gradient_input_border/gradient_input_border.dart';
-import '../../widgets/landing_page_divider.dart';
-import 'package:animate_do/animate_do.dart';
 
-class EnterURL extends StatefulWidget {
-  AnimationController animationController;
-  int index;
-  Function(AnimationController) callback;
-
-  EnterURL(this.callback, this.index);
-
-  @override
-  _EnterURLState createState() => _EnterURLState();
-}
-
-class _EnterURLState extends State<EnterURL> {
-  @override
-  Widget build(BuildContext context) {
-    return FadeInUpBig(
-      manualTrigger: true,
-      controller: (controller) {
-        controller.stop();
-        widget.callback(controller);
-      },
-      child: Column(
-        children: <Widget>[FabDivider('Enter URL ${widget.index}'), StyledFormField()],
-      ),
-    );
-  }
-}
 
 class StyledFormField extends StatefulWidget {
+  double width;
+  String hintText;
+
+  StyledFormField(this.width, this.hintText);
   @override
   _StyledFormFieldState createState() => _StyledFormFieldState();
 }
@@ -65,13 +41,13 @@ class _StyledFormFieldState extends State<StyledFormField> {
                 selected ? 8.0 : 0.0, // has the effect of extending the shadow
           )
         ], borderRadius: BorderRadius.circular(20.0), color: Colors.black),
-        width: 650,
+        width: widget.width,
         height: 35,
         child: TextField(
           focusNode: _focus,
           decoration: InputDecoration(
             filled: true,
-            hintText: "Enter URL",
+            hintText: widget.hintText,
             fillColor: Colors.white,
             contentPadding: EdgeInsets.symmetric(horizontal: 10),
             enabledBorder: GradientOutlineInputBorder(

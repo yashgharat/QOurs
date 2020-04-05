@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../extensions/hex_color.dart';
-import '../../widgets/landing_page_divider.dart';
 import '../../widgets/navigation_bar.dart';
-import './categories.dart';
-import './enter_url.dart';
+import './categories/categories.dart';
 
 class LandingPage extends StatelessWidget {
 

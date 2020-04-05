@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:q_ours/pages/landing_page/enter_url.dart';
-import '../../widgets/landing_page_divider.dart';
+import 'package:q_ours/pages/landing_page/categories/enter_url.dart';
+import 'package:q_ours/pages/landing_page/categories/business_card.dart';
+import '../../../widgets/landing_page_divider.dart';
 import 'dart:async';
 
 class Categories extends StatefulWidget {
@@ -20,13 +21,14 @@ class _CategoriesState extends State<Categories> {
   fadeInUpBigcallback(bool selected, int selectedIndex) {
     if (widget.previousAnimationController != null) {
       widget.previousAnimationController.reverse();
-      Future.delayed(const Duration(seconds: 1),
-          () => widget.animationController.forward());
+      sleep(800, () => widget.animationController.forward());
+    } else {
+      widget.animationController.forward();
     }
-    else {widget.animationController.forward();}
+
     setState(() {
+      widget.previousAnimationController = widget.animationController;
       this.index = selectedIndex;
-          widget.previousAnimationController = widget.animationController;
     });
   }
 
@@ -34,7 +36,8 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     List<_CategoryCard> categoryList = [
       _CategoryCard("URL", Icons.language, fadeInUpBigcallback, 1, this.index),
-      _CategoryCard("Business", Icons.work, fadeInUpBigcallback, 2, this.index),
+      _CategoryCard("Business", Icons.business_center, fadeInUpBigcallback, 2,
+          this.index),
       _CategoryCard(
           "Social Media", Icons.thumb_up, fadeInUpBigcallback, 3, this.index)
     ];
@@ -54,17 +57,17 @@ class _CategoriesState extends State<Categories> {
     );
   }
 
-  Future sleep() {
-    return new Future.delayed(const Duration(seconds: 1), () => "1");
+  Future sleep(int ms, Function() run) {
+    return new Future.delayed(Duration(milliseconds: ms), run);
   }
 
   Widget getChild(int index) {
     if (index == 1) {
-      return EnterURL(widget.getControllerCallback, index);
+      return EnterURL(widget.getControllerCallback);
     } else if (index == 2) {
-      return EnterURL(widget.getControllerCallback, index);
+      return EnterURL(widget.getControllerCallback);
     } else {
-      return EnterURL(widget.getControllerCallback, index);
+      return EnterURL(widget.getControllerCallback);
     }
   }
 }
