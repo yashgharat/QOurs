@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:q_ours/pages/landing_page/enter_url.dart';
 import '../../widgets/landing_page_divider.dart';
+import 'dart:async';
 
 class Categories extends StatefulWidget {
   AnimationController previousAnimationController, animationController;
@@ -19,11 +20,13 @@ class _CategoriesState extends State<Categories> {
   fadeInUpBigcallback(bool selected, int selectedIndex) {
     if (widget.previousAnimationController != null) {
       widget.previousAnimationController.reverse();
+      Future.delayed(const Duration(seconds: 1),
+          () => widget.animationController.forward());
     }
-    widget.animationController.forward();
+    else {widget.animationController.forward();}
     setState(() {
       this.index = selectedIndex;
-      widget.previousAnimationController = widget.animationController;
+          widget.previousAnimationController = widget.animationController;
     });
   }
 
@@ -49,6 +52,10 @@ class _CategoriesState extends State<Categories> {
         ],
       ),
     );
+  }
+
+  Future sleep() {
+    return new Future.delayed(const Duration(seconds: 1), () => "1");
   }
 
   Widget getChild(int index) {

@@ -9,8 +9,6 @@ class LandingPage extends StatelessWidget {
 
   AnimationController animationController;
 
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
