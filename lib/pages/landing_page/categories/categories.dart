@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:q_ours/pages/landing_page/categories/enter_url.dart';
 import 'package:q_ours/pages/landing_page/categories/business_card.dart';
 import '../../../widgets/landing_page_divider.dart';
+import 'package:animate_do/animate_do.dart';
 import 'dart:async';
 
 class Categories extends StatefulWidget {
@@ -26,10 +27,13 @@ class _CategoriesState extends State<Categories> {
       widget.animationController.forward();
     }
 
-    setState(() {
-      widget.previousAnimationController = widget.animationController;
-      this.index = selectedIndex;
-    });
+    widget.previousAnimationController = widget.animationController;
+
+    sleep(
+        700,
+        () => setState(() {
+              this.index = selectedIndex;
+            }));
   }
 
   @override
@@ -50,8 +54,12 @@ class _CategoriesState extends State<Categories> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: categoryList),
           Container(
-            child: getChild(this.index),
-          )
+              child: FadeInUpBig(
+                  manualTrigger: true,
+                  controller: (controller) {
+                    widget.animationController = controller;
+                  },
+                  child: getChild(this.index)))
         ],
       ),
     );
@@ -63,11 +71,11 @@ class _CategoriesState extends State<Categories> {
 
   Widget getChild(int index) {
     if (index == 1) {
-      return EnterURL(widget.getControllerCallback);
+      return EnterURL();
     } else if (index == 2) {
-      return EnterURL(widget.getControllerCallback);
+      return BusinessCard();
     } else {
-      return EnterURL(widget.getControllerCallback);
+      return EnterURL();
     }
   }
 }
