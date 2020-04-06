@@ -30,7 +30,7 @@ class LandingPage extends StatelessWidget {
                   children: <Widget>[
                     Container(
                         alignment: Alignment.center,
-                        margin: EdgeInsets.only(top: 100, bottom: 60),
+                        margin: EdgeInsets.only(top: 75, bottom: 60),
                         child: Text('Create Code',
                             style: TextStyle(
                                 color: Colors.white,

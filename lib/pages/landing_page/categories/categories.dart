@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:q_ours/pages/landing_page/categories/enter_url.dart';
 import 'package:q_ours/pages/landing_page/categories/business_card.dart';
+import 'package:q_ours/pages/landing_page/categories/social_media.dart';
 import '../../../widgets/landing_page_divider.dart';
 import 'package:animate_do/animate_do.dart';
 import 'dart:async';
@@ -75,7 +76,7 @@ class _CategoriesState extends State<Categories> {
     } else if (index == 2) {
       return BusinessCard();
     } else {
-      return EnterURL();
+      return SocialMedia();
     }
   }
 }

@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../widgets/landing_page_divider.dart';
 import '../../../widgets/styled_form_field.dart';
-import 'package:animate_do/animate_do.dart';
 
-class BusinessCard extends StatefulWidget {
-  @override
-  _BusinessCardState createState() => _BusinessCardState();
-}
-
-class _BusinessCardState extends State<BusinessCard> {
+class BusinessCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<StyledFormField> inputList = [
@@ -24,13 +18,12 @@ class _BusinessCardState extends State<BusinessCard> {
       children: <Widget>[
         FabDivider("Enter Info"),
         Container(
-          color: Colors.red,
-            width: 500,
-            height: 1000,
+            width: 800,
             child: GridView.count(
+              childAspectRatio: 375 / 35,
               shrinkWrap: true,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
               crossAxisCount: 2,
               children: inputList,
             ))
