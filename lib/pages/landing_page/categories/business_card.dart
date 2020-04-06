@@ -3,15 +3,16 @@ import '../../../widgets/landing_page_divider.dart';
 import '../../../widgets/styled_form_field.dart';
 
 class BusinessCard extends StatelessWidget {
+  final textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     List<StyledFormField> inputList = [
-      StyledFormField(375, 'Full Name'),
-      StyledFormField(375, 'Address'),
-      StyledFormField(375, 'Phone Number'),
-      StyledFormField(375, 'Company Name'),
-      StyledFormField(375, 'Email Address'),
-      StyledFormField(375, 'Position title')
+      StyledFormField(375, 'Full Name', this.textController),
+      StyledFormField(375, 'Address', this.textController),
+      StyledFormField(375, 'Phone Number', this.textController),
+      StyledFormField(375, 'Company Name', this.textController),
+      StyledFormField(375, 'Email Address', this.textController),
+      StyledFormField(375, 'Position title', this.textController)
     ];
 
     return Column(

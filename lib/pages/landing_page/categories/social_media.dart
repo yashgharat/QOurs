@@ -4,12 +4,13 @@ import '../../../widgets/styled_form_field.dart';
 import '../../../extensions/hex_color.dart';
 
 class SocialMedia extends StatelessWidget {
+  final textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     List<StyledFormField> inputList = [
-      StyledFormField(850, 'Enter URL'),
-      StyledFormField(850, 'Enter URL'),
-      StyledFormField(850, 'Enter URL'),
+      StyledFormField(850, 'Enter URL', this.textController),
+      StyledFormField(850, 'Enter URL', this.textController),
+      StyledFormField(850, 'Enter URL', this.textController),
     ];
     return Column(
       children: <Widget>[
@@ -22,13 +23,6 @@ class SocialMedia extends StatelessWidget {
                   ))
               .toList(),
         ),
-        RaisedButton(
-            color: HexColor.fromHex('B794F6'),
-            child: Text(
-              'Submit'.toUpperCase(),
-              style: TextStyle(letterSpacing: 1.5, fontSize: 14),
-            ),
-            onPressed: () => print("here")),
       ],
     );
   }

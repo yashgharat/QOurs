@@ -5,8 +5,9 @@ import 'package:gradient_input_border/gradient_input_border.dart';
 class StyledFormField extends StatefulWidget {
   double width;
   String hintText;
+  TextEditingController textController;
 
-  StyledFormField(this.width, this.hintText);
+  StyledFormField(this.width, this.hintText, this.textController);
   @override
   _StyledFormFieldState createState() => _StyledFormFieldState();
 }
@@ -44,6 +45,7 @@ class _StyledFormFieldState extends State<StyledFormField> {
         width: widget.width,
         height: 35,
         child: TextField(
+          controller: widget.textController,
           focusNode: _focus,
           decoration: InputDecoration(
             filled: true,
