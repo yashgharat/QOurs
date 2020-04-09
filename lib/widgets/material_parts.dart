@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:q_ours/extensions/hex_color.dart';
 
 class QOursSubmitLinkButton extends StatelessWidget {
-  Function() run;
+  Function run;
   String buttonText;
   QOursSubmitLinkButton(this.buttonText, this.run);
   @override
