@@ -10,6 +10,7 @@ class ShapeGrid extends StatelessWidget {
       child: Card(
         color: Colors.white.withOpacity(.6),
         elevation: 2,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );
   }
