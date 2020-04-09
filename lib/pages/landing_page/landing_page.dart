@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../extensions/hex_color.dart';
-import '../../widgets/navigation_bar.dart';
-import './categories/categories.dart';
+import 'package:q_ours/extensions/hex_color.dart';
+import 'package:q_ours/pages/shape_maker/shape_maker.dart';
+import 'package:q_ours/widgets/navigation_bar.dart';
+import 'package:animate_do/animate_do.dart';
+import 'categories/categories.dart';
 
 class LandingPage extends StatelessWidget {
-
   AnimationController animationController;
+
+  showShapeMakerCallback() {
+    animationController.forward();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +41,14 @@ class LandingPage extends StatelessWidget {
                                 color: Colors.white,
                                 fontSize: 50,
                                 fontWeight: FontWeight.w300))),
-                    Categories(),
-                    Container(
-                      height: 150,
-                    )
+                    Categories(this.showShapeMakerCallback),
+                    FadeInUpBig(
+                      manualTrigger: true,
+                      controller: (controller) {
+                        this.animationController = controller;
+                      },
+                      child: ShapeMaker(),
+                    ),
                   ],
                 ),
               ),

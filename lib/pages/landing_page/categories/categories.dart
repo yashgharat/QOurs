@@ -8,7 +8,10 @@ import 'dart:async';
 
 class Categories extends StatefulWidget {
   AnimationController previousAnimationController, animationController;
+  Function() buttonCallback;
   Widget child;
+
+  Categories(this.buttonCallback);
 
   getControllerCallback(controller) {
     this.animationController = controller;
@@ -72,7 +75,7 @@ class _CategoriesState extends State<Categories> {
 
   Widget getChild(int index) {
     if (index == 1) {
-      return EnterURL();
+      return EnterURL(widget.buttonCallback);
     } else if (index == 2) {
       return BusinessCard();
     } else {
