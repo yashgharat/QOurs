@@ -88,7 +88,7 @@ class _CategoryCard extends StatefulWidget {
   Function(bool, int) fadeinUpBigCallback;
 
   _CategoryCard(this.type, this.iconData, this.fadeinUpBigCallback, this.index,
-      this.selectedIndex) {}
+  this.selectedIndex) {}
 
   @override
   __CategoryCardState createState() => __CategoryCardState();

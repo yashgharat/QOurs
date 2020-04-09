@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../extensions/hex_color.dart';
 import '../widgets/navigation_bar.dart';
-
+import '../widgets/signin_parts.dart';
 
 class SignInPage extends StatefulWidget {
    @override
@@ -9,36 +9,26 @@ class SignInPage extends StatefulWidget {
 }
 
 class SignInPageState extends State<SignInPage> {
-   // Add font
-   // TextStyle style = TextStyle(fontFamily: '[font]', fontSize: #);
+   // Username icon
+   Icon userIcon = Icon(
+       Icons.person,
+       size: 48.0,
+       color: HexColor.fromHex('D4BFF9')); // myIcon is a 48px-wide widget.
+
+   // Password icon
+   Icon passIcon = Icon(
+       Icons.lock,
+       size: 48.0,
+       color: HexColor.fromHex('D4BFF9')); // myIcon is a 48px-wide widget.
+
+   TextEditingController userControl;
+   TextEditingController passControl;
+
    @override
    Widget build(BuildContext context) {
-      final emailField = Container(
-         width: 450.0,
-         height: 72.0,
-         child: TextField(
-            obscureText: false,
-            // style: style,
-            decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: "Email Adress",
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-         ),
-      );
-      final passwordField = Container(
-         width: 450.0,
-         height: 72.0,
-         child: TextField(
-             obscureText: true,
-             // style: style,
-             decoration: InputDecoration(
-                 filled: true,
-                 fillColor: Colors.white,
-                 hintText: "Password",
-                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0))),
-          ),
-      );
+      final emailField = UserTextField("Email Address", false, userControl, userIcon, false);
+
+      final passwordField = UserTextField("Password", true, passControl, passIcon, true);
 
       final loginButton = Container(
          width: 320.0,
@@ -63,11 +53,11 @@ class SignInPageState extends State<SignInPage> {
          width: 550.0,
          height: 500.0,
          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.3),
+            color: Colors.white.withOpacity(0.4),
             borderRadius: new BorderRadius.all(new Radius.circular(40.0)),
 //            boxShadow: [
 //               new BoxShadow(
-//                  color: Colqors.black,
+//                  color: Colors.black,
 //                  blurRadius: 20.0,
 //               )
 //            ],
