@@ -19,19 +19,9 @@ class NavigationBar extends StatelessWidget {
                 )),
             Row(
               children: <Widget>[
-                //
-                //*** I was wondering if could add the onTap() here when we are creating these links but I am not quite sure */
-                //  
-                //  new GestureDetector(
-                //   onTap: () {
-                //     Navigator.of(context).pushNamed('/about');
-                //   },
-                //    _NavItem('About),
-                //   );
-                //
-                _NavItem('About'),
-                _NavItem('Create Code'),
-                _NavItem('Sign in/up')
+                _NavItem('About', '/about'),
+                _NavItem('Create Code', '/'),
+                _NavItem('Sign in/up', '/authentication')
               ],
             )
           ],
@@ -39,19 +29,26 @@ class NavigationBar extends StatelessWidget {
   }
 }
 
-class _NavItem extends StatelessWidget {
-  @override
-  String navItemText;
-  _NavItem(this.navItemText);
+class _NavItem extends StatefulWidget {
+  String navItemText, route;
 
+  _NavItem(this.navItemText, this.route);
+
+  @override
+  __NavItemState createState() => __NavItemState();
+}
+
+class __NavItemState extends State<_NavItem> {
+  @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30),
-        child: Text(
-      navItemText,
-      style: TextStyle(
-        color: Colors.white,
-        fontSize: 26),
-    ));
+        padding: EdgeInsets.symmetric(horizontal: 30),
+        child: GestureDetector(
+          onTap: () => Navigator.of(context).pushNamed(widget.route),
+          child: Text(
+            widget.navItemText,
+            style: TextStyle(color: Colors.white, fontSize: 26),
+          ),
+        ));
   }
 }

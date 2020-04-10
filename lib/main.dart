@@ -9,20 +9,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "QOurs: A Code Generator",
-        home: Container(
-          decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-            HexColor.fromHex('1A2A6C'),
-            HexColor.fromHex('B21F1F'),
-            HexColor.fromHex('FDBB2D')
-          ])),
-          child: Column(
-            children: <Widget>[NavigationBar(), LandingPage()],
-          ),
-        ));
+        title: "QOurs: A Code Generator", home: Scaffold(body: LandingPage()));
   }
 }

@@ -15,35 +15,42 @@ class LandingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Center(
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                child: ListView(
-                  children: <Widget>[
-                    Container(
-                        alignment: Alignment.center,
-                        margin: EdgeInsets.only(top: 75, bottom: 60),
-                        child: Text('Create Code',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 50,
-                                fontWeight: FontWeight.w300))),
-                    Categories(this.showShapeMakerCallback),
-                    FadeInUpBig(
-                      manualTrigger: true,
-                      controller: (controller) {
-                        this.animationController = controller;
-                      },
-                      child: ShapeMaker(),
-                    ),
-                  ],
-                ),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+            HexColor.fromHex('1A2A6C'),
+            HexColor.fromHex('B21F1F'),
+            HexColor.fromHex('FDBB2D')
+          ])),
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: ListView(
+                children: <Widget>[
+                  NavigationBar(),
+                  Container(
+                      alignment: Alignment.center,
+                      margin: EdgeInsets.only(top: 75, bottom: 60),
+                      child: Text('Create Code',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 50,
+                              fontWeight: FontWeight.w300))),
+                  Categories(this.showShapeMakerCallback),
+                  FadeInUpBig(
+                    manualTrigger: true,
+                    controller: (controller) {
+                      this.animationController = controller;
+                    },
+                    child: ShapeMaker(),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
