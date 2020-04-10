@@ -15,23 +15,16 @@ class UserTextField extends StatefulWidget {
        this.textController, this.icon, this.isPassword);
    @override
    _UserTextField createState() => _UserTextField();
-
 }
 
 class _UserTextField extends State<UserTextField> {
    Icon passIcon;
-//   if (widget.obscureText)
-//   {
-//      passIcon= Icon(
-//         Icons.visibility,
-//         size: 48.0,
-//         color: HexColor.fromHex('D4BFF9'));
-//   }
    TextStyle style = TextStyle(
       fontWeight: FontWeight.w300,
       fontSize: 24,
       color: Colors.black87,
    );
+   @override
    Widget build(BuildContext context) {
       return Container(
          width: 450.0,
@@ -94,6 +87,103 @@ class _UserTextField extends State<UserTextField> {
    }
 }
 
-//class UserField extends StatefulWidget {
-//
-//}
+class LoginField extends StatefulWidget {
+   String buttonText;
+   String helpText;
+   LoginField(this.buttonText, this.helpText);
+   @override
+   LoginFieldState createState() => LoginFieldState();
+}
+
+class LoginFieldState extends State<LoginField> {
+   final _formKey = GlobalKey<FormState>();
+   @override
+   Widget build(BuildContext context) {
+      Icon userIcon = Icon(
+          Icons.person,
+          size: 48.0,
+          color: HexColor.fromHex('D4BFF9')); // myIcon is a 48px-wide widget.
+
+      // Password icon
+      Icon passIcon = Icon(
+          Icons.lock,
+          size: 48.0,
+          color: HexColor.fromHex('D4BFF9')); // myIcon is a 48px-wide widget.
+
+      TextEditingController userControl;
+      TextEditingController passControl;
+
+      final emailField = UserTextField("Email Address", false, userControl, userIcon, false);
+      final passwordField = UserTextField("Password", true, passControl, passIcon, true);
+      final loginButton = Container(
+         width: 320.0,
+         height: 69.0,
+         child: Material(
+            elevation: 5.0,
+            borderRadius: BorderRadius.circular(15.0),
+            color: HexColor.fromHex('9965F4'),
+            child: MaterialButton(
+               minWidth: MediaQuery.of(context).size.width,
+               onPressed: () {},
+               child: Text(
+                  widget.buttonText.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                     fontWeight: FontWeight.normal,
+                     fontSize: 36,
+                     color: Colors.white,
+                     letterSpacing: 1.25,
+                  ),
+               ),
+            ),
+         ),
+      );
+      return Container(
+         width: 550.0,
+         height: 500.0,
+         decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.4),
+            borderRadius: new BorderRadius.all(new Radius.circular(40.0)),
+//            boxShadow: [
+//               new BoxShadow(
+//                  color: Colors.black,
+//                  blurRadius: 20.0,
+//               )
+//            ],
+         ),
+         child: Card(
+           elevation: 5,
+           color: Colors.white.withOpacity(0.4),
+           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+             child: Padding(
+                padding: const EdgeInsets.all(70.0),
+                child: Form(
+                   key: _formKey,
+                   child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                         SizedBox(height: 20.0),
+                         emailField,
+                         SizedBox(height: 20.0),
+                         passwordField,
+                         SizedBox(height: 40.0),
+                         loginButton,
+                         SizedBox(height: 30.0),
+                         Text(
+                            "Need an account? Sign up here.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                               fontWeight: FontWeight.normal,
+                               fontSize: 24,
+                               color: Colors.black87,
+                            ),
+                         ),
+                      ],
+                   ),
+                ),
+             ),
+         ),
+      );
+   }
+}

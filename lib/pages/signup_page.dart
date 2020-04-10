@@ -3,14 +3,14 @@ import '../extensions/hex_color.dart';
 import '../widgets/navigation_bar.dart';
 import '../widgets/signin_parts.dart';
 
-class SignInPage extends StatefulWidget {
+class SignUpPage extends StatefulWidget {
    @override
-   SignInPageState createState() => SignInPageState();
+   SignUpPageState createState() => SignUpPageState();
 }
 
-class SignInPageState extends State<SignInPage> {
-   String helpText = "Need an account? Sign up here.";
-   String buttonText = "Login";
+class SignUpPageState extends State<SignUpPage> {
+   String helpText = "Already have an account? Login here.";
+   String buttonText = "Register";
    @override
    Widget build(BuildContext context) {
       // Container with all login details
