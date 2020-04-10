@@ -19,8 +19,8 @@ class SignInPageState extends State<SignInPage> {
       size: 48.0,
       color: HexColor.fromHex('D4BFF9')); // myIcon is a 48px-wide widget.
 
-  TextEditingController userControl;
-  TextEditingController passControl;
+  TextEditingController userControl = TextEditingController();
+  TextEditingController passControl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class SignInPageState extends State<SignInPage> {
         color: HexColor.fromHex('9965F4'),
         child: MaterialButton(
           minWidth: MediaQuery.of(context).size.width,
-          onPressed: () {},
+          onPressed: () => print("username: ${userControl.text},  password: ${passControl.text}"),
           child: Text(
             "Login",
             textAlign: TextAlign.center,
