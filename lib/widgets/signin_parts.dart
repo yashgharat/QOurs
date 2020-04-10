@@ -110,8 +110,8 @@ class LoginFieldState extends State<LoginField> {
         size: 48.0,
         color: HexColor.fromHex('D4BFF9')); // myIcon is a 48px-wide widget.
 
-    TextEditingController userControl;
-    TextEditingController passControl;
+    TextEditingController userControl = TextEditingController();
+    TextEditingController passControl = TextEditingController();
 
     final emailField =
         UserTextField("Email Address", false, userControl, userIcon, false);
@@ -125,7 +125,7 @@ class LoginFieldState extends State<LoginField> {
           elevation: 5,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          onPressed: () {},
+          onPressed: () => print('username: ${userControl.text}   password: ${passControl.text}'),
           child: Text(
             widget.buttonText.toUpperCase(),
             textAlign: TextAlign.center,
