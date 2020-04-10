@@ -19,6 +19,16 @@ class NavigationBar extends StatelessWidget {
                 )),
             Row(
               children: <Widget>[
+                //
+                //*** I was wondering if could add the onTap() here when we are creating these links but I am not quite sure */
+                //  
+                //  new GestureDetector(
+                //   onTap: () {
+                //     Navigator.of(context).pushNamed('/about');
+                //   },
+                //    _NavItem('About),
+                //   );
+                //
                 _NavItem('About'),
                 _NavItem('Create Code'),
                 _NavItem('Sign in/up')
