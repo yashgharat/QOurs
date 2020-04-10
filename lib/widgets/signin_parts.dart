@@ -92,7 +92,10 @@ class _UserTextField extends State<UserTextField> {
 class LoginField extends StatefulWidget {
   String buttonText;
   String helpText;
-  LoginField(this.buttonText, this.helpText);
+
+  Function(String, String) action;
+
+  LoginField(this.buttonText, this.helpText, this.action);
   @override
   LoginFieldState createState() => LoginFieldState();
 }
@@ -125,7 +128,7 @@ class LoginFieldState extends State<LoginField> {
           elevation: 5,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          onPressed: () => print('username: ${userControl.text}   password: ${passControl.text}'),
+          onPressed: () => widget.action(userControl.text, passControl.text),
           child: Text(
             widget.buttonText.toUpperCase(),
             textAlign: TextAlign.center,

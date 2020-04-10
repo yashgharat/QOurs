@@ -17,9 +17,13 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+  login(String username, String password) {
+    print("do login");
+  }
+
   @override
   Widget build(BuildContext context) {
-    final loginField = LoginField(widget.buttonText, widget.helpText);
+    final loginField = LoginField(widget.buttonText, widget.helpText, login);
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -30,9 +34,9 @@ class _SignInState extends State<SignIn> {
             HexColor.fromHex('B21F1F'),
             HexColor.fromHex('FDBB2D')
           ])),
-      child:Center(
-          child: loginField,
-        ),
+      child: Center(
+        child: loginField,
+      ),
     );
   }
 }
@@ -45,9 +49,13 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  signup(String username, String password) {
+    print("do signup");
+  }
+
   @override
   Widget build(BuildContext context) {
-    final loginField = LoginField(widget.buttonText, widget.helpText);
+    final loginField = LoginField(widget.buttonText, widget.helpText, signup);
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -58,9 +66,9 @@ class _SignUpState extends State<SignUp> {
             HexColor.fromHex('B21F1F'),
             HexColor.fromHex('FDBB2D')
           ])),
-      child:Center(
-          child: loginField,
-        ),
+      child: Center(
+        child: loginField,
+      ),
     );
   }
 }
