@@ -10,5 +10,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: "QOurs: A Code Generator", home: Scaffold(body: LandingPage()));
+        initialRoute: '/',
+        onGenerateRoute: RouteGenerator.generateRoute,
   }
 }
