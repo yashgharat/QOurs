@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:q_ours/router.dart';
+import 'package:q_ours/services/locator.dart';
+import 'package:q_ours/services/navigation_service.dart';
 import '../extensions/link_hover.dart';
 
 class NavigationBar extends StatelessWidget {
@@ -19,9 +22,9 @@ class NavigationBar extends StatelessWidget {
                 )),
             Row(
               children: <Widget>[
-                _NavItem('About', '/about'),
-                _NavItem('Create Code', '/'),
-                _NavItem('Sign in/up', '/authentication')
+                _NavItem('About', AboutRoute),
+                _NavItem('Create Code', HomeRoute),
+                _NavItem('Sign in/up', AuthRoute)
               ],
             )
           ],
@@ -44,7 +47,7 @@ class __NavItemState extends State<_NavItem> {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 30),
         child: GestureDetector(
-          onTap: () => Navigator.of(context).pushNamed(widget.route),
+          onTap: () => locator<NavigationService>().navigateTo(widget.route),
           child: Text(
             widget.navItemText,
             style: TextStyle(color: Colors.white, fontSize: 26),

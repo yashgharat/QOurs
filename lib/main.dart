@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:q_ours/pages/view_container.dart';
-import 'package:q_ours/routes.dart';
+import 'package:q_ours/router.dart';
+import 'package:q_ours/services/locator.dart';
 
-void main() => runApp(App());
+void main() {
+  setupLocator();
+  runApp(App());
+}
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "QOurs: A Code Generator", 
-        initialRoute: '/',
-        onGenerateRoute: RouteGenerator.generateRoute,
-        home: ViewContainer(),
+      title: "QOurs: A Code Generator",
+      home: ViewContainer(),
     );
   }
 }

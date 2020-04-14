@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:q_ours/extensions/hex_color.dart';
-import 'package:q_ours/routes.dart';
+import 'package:q_ours/router.dart';
 import 'package:q_ours/services/locator.dart';
 import 'package:q_ours/services/navigation_service.dart';
 import 'package:q_ours/widgets/navigation_bar.dart';
@@ -28,9 +28,10 @@ class ViewContainer extends StatelessWidget {
             children: <Widget>[
               NavigationBar(),
               Expanded(
-                  child: Navigator(
-                onGenerateRoute: RouteGenerator.generateRoute,
+                  child: Navigator( 
                 initialRoute: '/',
+                key: locator<NavigationService>().navKey,
+                onGenerateRoute: generateRoute,
               ))
             ],
           ),

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:q_ours/pages/about_page/about_page.dart';
 import 'package:q_ours/pages/authentication_page/authentication_page.dart';
 import 'package:q_ours/pages/landing_page/landing_page.dart';
 
-class RouteGenerator {
-  static Route<dynamic> generateRoute(RouteSettings settings){
+const String HomeRoute = 'home';
+const String AboutRoute = 'about';
+const String AuthRoute = 'authentication';
 
-    switch(settings.name){
-      case '/':
+Route<dynamic> generateRoute(RouteSettings settings) {
+  switch (settings.name) {
+    case HomeRoute:
         return MaterialPageRoute(builder: (_) => LandingPage());
-      //**** These are the routes for About, CreateCode, SignIn and SignUp *****/
-      case '/about':
+    case AboutRoute:
         return MaterialPageRoute(builder: (_) => AboutPage());
-      case '/authentication':
+    case AuthRoute:
         return MaterialPageRoute(builder: (_) => AuthenticationPage());
-
-      default:
+    default:
         return MaterialPageRoute(builder: (_) => LandingPage());
-    }
   }
 }
