@@ -19,6 +19,7 @@ environment:
 dependencies:
   condition: ^0.0.7
   animate_do: ^1.6.3
+  flip_card: ^0.4.4
   http: ^0.12.0+4
   gradient_input_border: ^1.0.0
   responsive_builder: ^0.1.2
