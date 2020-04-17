@@ -7,10 +7,14 @@ import 'package:q_ours/widgets/title_text.dart';
 import 'categories/categories.dart';
 
 class LandingPage extends StatelessWidget {
-  AnimationController animationController;
+  AnimationController landingController;
+
+  getController(AnimationController animationController) {
+    this.landingController = animationController;
+  }
 
   showShapeMakerCallback() {
-    animationController.forward();
+    landingController.forward();
   }
 
   @override
@@ -24,7 +28,7 @@ class LandingPage extends StatelessWidget {
             FadeInUpBig(
               manualTrigger: true,
               controller: (controller) {
-                this.animationController = controller;
+                getController(controller);
               },
               child: ShapeMaker(),
             ),

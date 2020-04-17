@@ -61,7 +61,7 @@ class _CategoriesState extends State<Categories> {
               child: FadeInUpBig(
                   manualTrigger: true,
                   controller: (controller) {
-                    widget.animationController = controller;
+                    widget.getControllerCallback(controller);
                   },
                   child: getChild(this.index)))
         ],
