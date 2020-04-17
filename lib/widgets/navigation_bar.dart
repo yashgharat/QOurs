@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:q_ours/router.dart';
+import 'package:q_ours/services/auth_service.dart';
 import 'package:q_ours/services/locator.dart';
 import 'package:q_ours/services/navigation_service.dart';
 import '../extensions/link_hover.dart';
 
-class NavigationBar extends StatelessWidget {
+class NavigationBar extends StatefulWidget {
+  static _NavigationBarState of(BuildContext context) => context.findAncestorStateOfType();
+  @override
+  _NavigationBarState createState() => _NavigationBarState();
+}
+
+class _NavigationBarState extends State<NavigationBar> {
+  bool authenticated = false;
+  changeNav(bool update) {
+    setState(() {
+      authenticated = update;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,12 +37,14 @@ class NavigationBar extends StatelessWidget {
               children: <Widget>[
                 _NavItem('About', AboutRoute),
                 _NavItem('Create Code', HomeRoute),
-                _NavItem('Sign in/up', AuthRoute)
+                (!authenticated) ? _NavItem('Sign in/up', AuthRoute) : LoggedInItem(),
               ],
             )
           ],
         ));
   }
+
+
 }
 
 class _NavItem extends StatefulWidget {
@@ -53,5 +68,37 @@ class __NavItemState extends State<_NavItem> {
             style: TextStyle(color: Colors.white, fontSize: 26),
           ),
         ));
+  }
+}
+
+class LoggedInItem extends StatefulWidget {
+  @override
+  _LoggedInItemState createState() => _LoggedInItemState();
+}
+
+class _LoggedInItemState extends State<LoggedInItem> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        children: <Widget>[
+          GestureDetector(
+            onTap: () => AuthService().signOut(),
+            child: Text(
+              'Sign out',
+              style: TextStyle(color: Colors.white, fontSize: 26),
+            ),
+          ),
+          Padding(
+              padding: EdgeInsets.only(left: 15),
+              child: Icon(
+                Icons.person,
+                color: Colors.white,
+                size: 36,
+              )),
+        ],
+      ),
+    );
   }
 }

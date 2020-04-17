@@ -2,7 +2,9 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:q_ours/extensions/hex_color.dart';
+import 'package:q_ours/services/auth_service.dart';
 import 'package:q_ours/widgets/auth_parts.dart';
+import 'package:q_ours/widgets/navigation_bar.dart';
 import 'package:q_ours/widgets/title_text.dart';
 
 class AuthenticationPage extends StatefulWidget {
@@ -17,11 +19,11 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
 
   GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
 
-  action(String username, String password) {
+  authenticate(String email, String password) {
     if (isAccount) {
-      print('login');
+      AuthService().signIn(email, password);
     } else {
-      print('register');
+      AuthService().register(email, password);
     }
   }
 
@@ -40,16 +42,19 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
   Widget build(BuildContext context) {
     RichText loginText = RichText(
         text: TextSpan(children: <TextSpan>[
-      TextSpan(text: 'Need an Account? ', style: TextStyle(color: Colors.black)),
       TextSpan(
-          text: 'Sign up' ,
+          text: 'Need an Account? ', style: TextStyle(color: Colors.black)),
+      TextSpan(
+          text: 'Sign up',
           style: TextStyle(color: HexColor.fromHex('EB3505')),
           recognizer: TapGestureRecognizer()..onTap = switchType)
     ]));
 
     RichText registerText = RichText(
         text: TextSpan(children: <TextSpan>[
-      TextSpan(text: 'Already have an account? ', style: TextStyle(color: Colors.black)),
+      TextSpan(
+          text: 'Already have an account? ',
+          style: TextStyle(color: Colors.black)),
       TextSpan(
           text: 'Login',
           style: TextStyle(color: HexColor.fromHex('EB3505')),
@@ -63,10 +68,12 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
         FlipCard(
           key: cardKey,
           flipOnTouch: false,
+          onFlipDone: (status) => isAccount = status,
           direction: FlipDirection.HORIZONTAL,
           speed: 1000,
-          front: Center(child: LoginField('Login', loginText, action)),
-          back: Center(child: LoginField('Register', registerText, action)),
+          front: Center(child: LoginField('Login', loginText, authenticate)),
+          back:
+              Center(child: LoginField('Register', registerText, authenticate)),
         )
       ],
     ));
