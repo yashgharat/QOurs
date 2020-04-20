@@ -7,6 +7,7 @@ import 'package:q_ours/widgets/navigation_bar.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class ViewContainer extends StatelessWidget {
+  GlobalKey<NavigationBarState> navBarKey = GlobalKey<NavigationBarState>();
   ViewContainer({Key key}) : super(key: key);
 
   @override
@@ -28,7 +29,7 @@ class ViewContainer extends StatelessWidget {
             children: <Widget>[
               NavigationBar(),
               Expanded(
-                  child: Navigator( 
+                  child: Navigator(
                 initialRoute: '/',
                 key: locator<NavigationService>().navKey,
                 onGenerateRoute: generateRoute,

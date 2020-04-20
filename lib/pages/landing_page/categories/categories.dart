@@ -8,7 +8,7 @@ import 'dart:async';
 
 class Categories extends StatefulWidget {
   AnimationController previousAnimationController, animationController;
-  Function() buttonCallback;
+  Function(String) buttonCallback;
   Widget child;
 
   Categories(this.buttonCallback);
@@ -23,9 +23,9 @@ class Categories extends StatefulWidget {
 
 class _CategoriesState extends State<Categories> {
   int index, previousIndex = 0;
-  fadeInUpBigcallback(bool selected, int selectedIndex) {
+  fadeInUpBigcallback(bool selected, int selectedIndex) async {
     if (widget.previousAnimationController != null) {
-      widget.previousAnimationController.reverse();
+      await widget.previousAnimationController.reverse();
       sleep(800, () => widget.animationController.forward());
     } else {
       widget.animationController.forward();

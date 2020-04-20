@@ -12,28 +12,26 @@ FirebaseUser _currentUser;
 class AuthService {
   static bool isLoggedIn = false;
 
-  handleAuth(context) {
-    FirebaseAuth.instance.onAuthStateChanged.listen((user) {
-      if (user.email != '') {
-        //logged in
-        isLoggedIn = true;
-        NavigationBar.of(context).changeNav(true);
-        return ViewContainer();
-      } else {
-        //needs to be authenticated
-        isLoggedIn = false;
-        NavigationBar.of(context).changeNav(false);
-        return ViewContainer();
-      }
-    });
+  handleAuth() {
+    if (_currentUser != null && _currentUser.email != '') {
+      //logged in
+      isLoggedIn = true;      
+      locator<NavigationService>().navigateTo(HomeRoute);
+    } else {
+      //needs to be authenticated
+      isLoggedIn = false;
+      
+    }
   }
 
   signOut() => FirebaseAuth.instance.signOut();
 
   signIn(email, password) async {
     _currentUser = (await FirebaseAuth.instance
-            .signInWithEmailAndPassword(email: email, password: password))
+            .signInWithEmailAndPassword(email: email, password: password)
+            .catchError((e) => print(e)))
         .user;
+    handleAuth();
   }
 
   register(email, password) async {

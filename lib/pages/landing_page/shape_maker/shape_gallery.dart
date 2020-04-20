@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ShapeGallery extends StatelessWidget {
-  Function(String) addShape;
-  Function() deleteShape;
+  Function(String, int) addShape;
+  Function(bool) deleteShape;
 
   ShapeGallery(this.addShape, this.deleteShape);
 
@@ -18,11 +18,11 @@ class ShapeGallery extends StatelessWidget {
         elevation: 2,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Row(children: <Widget>[
-          _ShapeContainer('circle', addShape),
-          _ShapeContainer('triangle', addShape),
-          _ShapeContainer('rectangle', addShape),
-          _ShapeContainer('pentagon', addShape),
-          _ShapeContainer('hexagon', addShape),
+          _ShapeContainer('circle', 1, addShape),
+          _ShapeContainer('triangle', 3, addShape),
+          _ShapeContainer('rectangle', 4, addShape),
+          _ShapeContainer('pentagon', 5, addShape),
+          _ShapeContainer('hexagon', 6, addShape),
           _DeleteShapeButton(deleteShape),
         ]),
       ),
@@ -31,7 +31,7 @@ class ShapeGallery extends StatelessWidget {
 }
 
 class _DeleteShapeButton extends StatelessWidget {
-  Function() deleteShape;
+  Function(bool) deleteShape;
 
   _DeleteShapeButton(this.deleteShape);
   @override
@@ -41,8 +41,12 @@ class _DeleteShapeButton extends StatelessWidget {
         height: 100,
         width: 100,
         child: InkWell(
-          onTap: () => deleteShape(),
-          child: Icon(Icons.delete, size: 52,),
+          onTap: () => deleteShape(false),
+          onLongPress: () => deleteShape(true),
+          child: Icon(
+            Icons.delete,
+            size: 52,
+          ),
         ),
       ),
     );
@@ -51,9 +55,10 @@ class _DeleteShapeButton extends StatelessWidget {
 
 class _ShapeContainer extends StatelessWidget {
   String shapeName;
-  Function(String) addShape;
+  int shapeEdges;
+  Function(String, int) addShape;
 
-  _ShapeContainer(this.shapeName, this.addShape);
+  _ShapeContainer(this.shapeName, this.shapeEdges, this.addShape);
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +71,7 @@ class _ShapeContainer extends StatelessWidget {
         image: AssetImage('lib/assets/shapes/${shapeName}.png'),
       )),
       child: InkWell(
-        onTap: () => addShape(shapeName),
+        onTap: () => addShape(shapeName, shapeEdges),
       ),
     ));
   }
