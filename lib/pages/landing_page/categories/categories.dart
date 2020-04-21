@@ -50,21 +50,24 @@ class _CategoriesState extends State<Categories> {
           "Social Media", Icons.thumb_up, fadeInUpBigcallback, 3, this.index)
     ];
 
-    return Container(
-      child: Column(
-        children: <Widget>[
-          FabDivider('Category'),
-          Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: categoryList),
-          Container(
-              child: FadeInUpBig(
-                  manualTrigger: true,
-                  controller: (controller) {
-                    widget.getControllerCallback(controller);
-                  },
-                  child: getChild(this.index)))
-        ],
+    return FadeInUpBig(
+      duration: Duration(seconds: 2),
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            FabDivider('Category'),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: categoryList),
+            Container(
+                child: FadeInUpBig(
+                    manualTrigger: true,
+                    controller: (controller) {
+                      widget.getControllerCallback(controller);
+                    },
+                    child: getChild(this.index)))
+          ],
+        ),
       ),
     );
   }
