@@ -116,7 +116,7 @@ class __CategoryCardState extends State<_CategoryCard> {
     setState(() {
       _selected = (widget.index == widget.selectedIndex) ? true : false;
     });
-    return Container(
+    return Flexible(
       child: Card(
         elevation: 1,
         margin: EdgeInsets.symmetric(horizontal: 45, vertical: 50),

@@ -14,17 +14,21 @@ class AuthService {
 
   handleAuth() {
     if (_currentUser != null && _currentUser.email != '') {
-      //logged in
-      isLoggedIn = true;      
+      isLoggedIn = true;
       locator<NavigationService>().navigateTo(HomeRoute);
+      ViewContainer.navBarKey.currentState.changeNav(true);
     } else {
-      //needs to be authenticated
       isLoggedIn = false;
-      
+      ViewContainer.navBarKey.currentState.changeNav(false);
+      locator<NavigationService>().navigateTo(AuthRoute);
     }
   }
 
-  signOut() => FirebaseAuth.instance.signOut();
+  signOut() async {
+    await FirebaseAuth.instance.signOut();
+    _currentUser = null;
+    handleAuth();
+  }
 
   signIn(email, password) async {
     _currentUser = (await FirebaseAuth.instance

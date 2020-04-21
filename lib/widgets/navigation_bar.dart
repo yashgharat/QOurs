@@ -7,6 +7,7 @@ import 'package:q_ours/services/navigation_service.dart';
 import '../extensions/link_hover.dart';
 
 class NavigationBar extends StatefulWidget {
+  NavigationBar({Key key}) : super(key: key);
   @override
   NavigationBarState createState() => NavigationBarState();
 }
