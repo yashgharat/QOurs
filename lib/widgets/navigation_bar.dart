@@ -7,6 +7,7 @@ import 'package:q_ours/services/navigation_service.dart';
 import '../extensions/link_hover.dart';
 
 class NavigationBar extends StatefulWidget {
+  static int index = 0;
   NavigationBar({Key key}) : super(key: key);
   @override
   NavigationBarState createState() => NavigationBarState();
@@ -25,13 +26,11 @@ class NavigationBarState extends State<NavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth.instance.onAuthStateChanged.listen((user) {
-      if (user != null && user.email != '') {
-        print('logged in');
-      } else {
-        //needs to be authenticated
-      }
-    });
+    updateNav(int i) {
+      setState(() {
+        NavigationBar.index = i;
+      });
+    }
     return Container(
         height: 64,
         width: double.infinity,
@@ -47,10 +46,10 @@ class NavigationBarState extends State<NavigationBar> {
                 )),
             Row(
               children: <Widget>[
-                _NavItem('About', AboutRoute),
-                _NavItem('Create Code', HomeRoute),
+                _NavItem(1, 'About', AboutRoute, updateNav),
+                _NavItem(0, 'Create Code', HomeRoute, updateNav),
                 (!authenticated)
-                    ? _NavItem('Sign in/up', AuthRoute)
+                    ? _NavItem(2, 'Sign in/up', AuthRoute, updateNav)
                     : LoggedInItem(),
               ],
             )
@@ -60,9 +59,11 @@ class NavigationBarState extends State<NavigationBar> {
 }
 
 class _NavItem extends StatefulWidget {
+  int index;
   String navItemText, route;
+  Function(int) callback;
 
-  _NavItem(this.navItemText, this.route);
+  _NavItem(this.index, this.navItemText, this.route, this.callback);
 
   @override
   __NavItemState createState() => __NavItemState();
@@ -74,10 +75,17 @@ class __NavItemState extends State<_NavItem> {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 30),
         child: GestureDetector(
-          onTap: () => locator<NavigationService>().navigateTo(widget.route),
+          onTap: () {
+            widget.callback(widget.index);
+            locator<NavigationService>().navigateTo(widget.route);
+          },
           child: Text(
             widget.navItemText,
-            style: TextStyle(color: Colors.white, fontSize: 26),
+            style: TextStyle(
+                color: NavigationBar.index == widget.index
+                    ? Colors.red
+                    : Colors.white,
+                fontSize: 26),
           ),
         ));
   }
